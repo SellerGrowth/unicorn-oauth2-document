@@ -1,6 +1,7 @@
 # SellerGrowth 网页授权获取用户基本信息
 
-access_token是网站应用的全局唯一票据，在调用各接口时都需使用access_token。开发者需要进行妥善保存。access_token的有效期目前为2个小时，需定时刷新，重复获取将导致上次获取的access_token失效。
+access_token是网站应用的全局唯一票据，在调用各接口时都需使用access_token。开发者需要进行妥善保存。access_token的有效期目前为2个小时，需定时刷新，重复获取将导致上次获取的access_token失效。主要参考[OAuth 2.0 core spec]。
+
 
 access_token的使用及生成方式说明：
 > 1、为了保密client_secrect，第三方需要一个access_token获取和刷新的中控服务器。而其他业务逻辑服务器所使用的access_token均来自于该中控服务器，不应该各自去刷新，否则会造成access_token覆盖而影响业务；
@@ -41,3 +42,5 @@ header：{'Content-Type': 'application/x-www-form-urlencoded'}
 
 ### Version
 1.0.1
+
+[OAuth 2.0 core spec]: <https://tools.ietf.org/html/rfc6749>
