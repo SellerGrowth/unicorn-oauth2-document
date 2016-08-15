@@ -142,8 +142,5 @@ header：{'Authorization': 'Bearer ACCESS_TOKEN'}
 {"detail":"Authentication credentials were not provided."}
 ```
 
-### Version
-1.0.1
-
 [OAuth 2.0 core spec]: <https://tools.ietf.org/html/rfc6749>
 [Bearer Token]: <https://tools.ietf.org/html/rfc6750>
