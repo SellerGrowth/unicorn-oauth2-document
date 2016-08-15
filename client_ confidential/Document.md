@@ -41,6 +41,6 @@ header：{'Content-Type': 'application/x-www-form-urlencoded'}
 ```
 
 ### Version
-1.0.1
+1.0.0
 
 [OAuth 2.0 core spec]: <https://tools.ietf.org/html/rfc6749>
