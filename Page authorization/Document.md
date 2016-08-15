@@ -25,6 +25,8 @@ https://www.sellergrowth.com/api/oauth2/authorize/?response_type=code&client_id=
 
 ![redirect_uri参数错误](https://github.com/SellerGrowth/unicorn-oauth2-document/blob/master/Page%20authorization/Invalid_Redirect_URI.png?raw=true)
 
+当获取code后，同一用户未过期未使用的旧code将失效。
+
 
 ### 参数说明：
 | 参数           | 必须         | 说明   |
@@ -39,7 +41,7 @@ https://www.sellergrowth.com/api/oauth2/authorize/?response_type=code&client_id=
 如果用户同意授权，页面将跳转至 redirect_uri/?code=CODE&state=STATE。若用户禁止授权，或者请求非法的scope，则重定向后不会带上code参数，仅会带上error参数redirect_uri/?error=ERR_MSG
 
 # 第二步，通过code换取网页授权access_token
-尤其注意：由于网页应用的client_secret和获取到的access_token安全级别都非常高，必须只保存在服务器，不允许传给客户端。后续刷新access_token、通过access_token获取用户信息等步骤，也必须从服务器发起。
+尤其注意：由于网页应用的client_secret和获取到的access_token安全级别都非常高，必须只保存在服务器，不允许传给客户端。后续刷新access_token、通过access_token获取用户信息等步骤，也必须从服务器发起。一旦使用code换取access_token后，code立即失效，同一用户旧的未过期access_token将失效，旧的refresh_token在一段时间内（6、7天）仍然可以使用。
 
 ### 请求方法
 ```html
@@ -75,7 +77,7 @@ header：{'Content-Type': 'application/x-www-form-urlencoded'}
 ```
 
 # 第三步：刷新access_token（如果需要）
-由于access_token拥有较短的有效期，当access_token超时后，可以使用refresh_token进行刷新，refresh_token拥有较长的有效期（6天、7天），当refresh_token失效的后，需要用户重新授权。
+由于access_token拥有较短的有效期，当access_token超时后，可以使用refresh_token进行刷新，refresh_token拥有较长的有效期（6天、7天），当refresh_token失效的后，需要用户重新授权。当使用refresh_token刷新access_token后，同一用户旧的未过期access_token将失效。
 
 ### 请求方法
 ```html
@@ -115,7 +117,7 @@ header：{'Content-Type': 'application/x-www-form-urlencoded'}
 ```html
 开发者可以通过access_token拉取用户信息：
 method：GET
-url：https://gaochao.sellergrowth.com/api/oauth2_server/api/oauth_user_info
+url：https://gaochao.sellergrowth.com/api/oauth2_server/user_info/
 header：{'Authorization': 'Bearer ACCESS_TOKEN'}
 ```
 
@@ -141,7 +143,7 @@ header：{'Authorization': 'Bearer ACCESS_TOKEN'}
 ```
 
 ### Version
-1.0.0
+1.0.1
 
 [OAuth 2.0 core spec]: <https://tools.ietf.org/html/rfc6749>
 [Bearer Token]: <https://tools.ietf.org/html/rfc6750>
