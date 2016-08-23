@@ -1,4 +1,4 @@
-# SellerGrowth 网页授权获取用户基本信息
+# SellerGrowth AccessToken 获取
 
 access_token是网站应用的全局唯一票据，在调用各接口时都需使用access_token。开发者需要进行妥善保存。access_token的有效期目前为2个小时，需定时刷新，重复获取将导致上次获取的access_token失效。主要参考[OAuth 2.0 core spec]。
 
